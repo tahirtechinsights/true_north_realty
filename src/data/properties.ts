@@ -12,7 +12,7 @@ export const allPropertiesData = [
       { label: "Bathrooms", value: "2" },
       { label: "Square Footage", value: "1,200 sqft" },
       { label: "Property Type", value: "Condominium" },
-      { label: "Year Built", "value": "2018" },
+      { label: "Year Built", value: "2018" },
       { label: "Parking", value: "1 assigned spot" },
       { label: "Amenities", value: "Concierge, Gym, Rooftop Terrace" },
       { label: "Location", value: "Downtown Vancouver, BC" },

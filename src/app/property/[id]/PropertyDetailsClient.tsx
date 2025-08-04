@@ -1,86 +1,59 @@
 "use client";
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { allPropertiesData } from '../../../data/properties';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { motion, Variants, Transition } from "framer-motion";
 
-// ===== Types =====
-// Types are defined in the data file and used through allPropertiesData
+// You do not need to import properties data here as it is passed as a prop from the server component.
 
-// ===== Animation Variants (Fixed Types) =====
-const springTransition: Transition = {
-  type: "spring",
-  stiffness: 100,
-  damping: 10,
+// Define TypeScript types based on your properties data structure
+type PropertyDetail = {
+  label: string;
+  value: string;
 };
 
-const pageVariants: Variants = {
-  hidden: { 
-    opacity: 0,
-    y: 20
-  },
+type Property = {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  image: string;
+  details: PropertyDetail[];
+  mapLink: string;
+};
+
+// Animation variants
+const pageVariants = {
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      ...springTransition, // Spread the transition properties
-      staggerChildren: 0.2,
-      when: "beforeChildren"
-    }
-  }
+      type: "spring" as const,
+      stiffness: 70,
+      damping: 10,
+      staggerChildren: 0.1,
+    },
+  },
 };
 
-const itemVariants: Variants = {
+const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 12
-    } satisfies Transition
-  }
+  visible: { opacity: 1, y: 0 },
 };
 
-const imageVariants: Variants = {
+const imageVariants = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    scale: 1, 
-    transition: { 
-      duration: 0.6 
-    } 
-  },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
 };
 
-// ===== Main Component =====
-export default function PropertyDetailsPage() {
-  const params = useParams();
-  const propertyId = parseInt(params?.id as string);
-  const currentProperty = allPropertiesData.find(p => p.id === propertyId);
+// Props type for the client component
+type PropertyDetailsContentProps = {
+  currentProperty: Property;
+};
 
-  // Property not found state
-  if (!currentProperty) {
-    return (
-      <div className="min-h-screen bg-gray-900 text-white font-inter flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-4xl font-bold text-red-500 mb-4">Property Not Found</h1>
-        <p className="text-lg text-gray-300 mb-8">The property you are looking for does not exist.</p>
-        <motion.button
-          className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50"
-          onClick={() => window.history.back()}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Go Back
-        </motion.button>
-      </div>
-    );
-  }
-
+export default function PropertyDetailsContent({ currentProperty }: PropertyDetailsContentProps) {
   return (
     <div className="min-h-screen bg-gray-900 text-white font-inter py-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,7 +84,7 @@ export default function PropertyDetailsPage() {
             {currentProperty.title}
           </motion.h1>
 
-          {/* Property Image */}
+          {/* Property Image with optimized Next.js Image component */}
           <motion.div
             className="mb-8 rounded-lg overflow-hidden relative h-96"
             variants={imageVariants}
@@ -151,14 +124,13 @@ export default function PropertyDetailsPage() {
           {/* Details Grid */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-10"
-            variants={{}}
+            variants={pageVariants}
           >
             {currentProperty.details.map((detail, index) => (
               <motion.div 
                 key={`${detail.label}-${index}`}
                 className="flex justify-between items-center border-b border-gray-700 pb-2" 
                 variants={itemVariants}
-                custom={index}
               >
                 <span className="font-semibold text-gray-400">{detail.label}:</span>
                 <span className="text-gray-200">{detail.value}</span>
@@ -187,7 +159,7 @@ export default function PropertyDetailsPage() {
             </div>
           </motion.div>
 
-          {/* Contact Button */}
+          {/* Contact Agent Button */}
           <motion.button
             className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 text-xl"
             variants={itemVariants}

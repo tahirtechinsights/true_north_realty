@@ -1,10 +1,18 @@
 import '../styles/globals.css';
+import { Inter } from 'next/font/google';
+
+// Optimize font loading with next/font
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap', // Optional: ensures text remains visible during webfont load
+  variable: '--font-inter', // Optional: if you want to use CSS variables
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
-        {/* Favicon links - corrected paths (remove /public prefix) */}
+        {/* Favicon links */}
         <link rel="icon" href="/assets/favicons/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
@@ -21,21 +29,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>True North Realty - Your Canadian Home Experts</title>
         <meta name="description" content="Discover your perfect Canadian home with True North Realty. Browse featured properties across Canada." />
 
-        {/* Preconnect for Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" 
-          rel="stylesheet" 
-        />
-
         {/* Three.js script - added defer for better performance */}
         <script 
           src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" 
           defer
         />
       </head>
-      <body className="font-inter">
+      <body>
         {children}
       </body>
     </html>
