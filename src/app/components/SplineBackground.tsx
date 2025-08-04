@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 
 const SplineBackground = () => {
@@ -12,7 +12,7 @@ const SplineBackground = () => {
     setIsLoading(false);
   };
 
-  const handleError = (error: any) => {
+  const handleError = (error: unknown) => {
     console.error('❌ Spline scene failed to load:', error);
     setHasError(true);
     setIsLoading(false);

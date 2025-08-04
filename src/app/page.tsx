@@ -39,17 +39,6 @@ const itemVariants: Variants = {
   }
 };
 
-const imageVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    scale: 1, 
-    transition: { 
-      duration: 0.6 
-    } 
-  },
-};
-
 // ===== Main Component =====
 export default function HomePage() {
   return (
@@ -126,7 +115,7 @@ export default function HomePage() {
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Discover exceptional properties across Canada's most beautiful locations. 
+            Discover exceptional properties across Canada&apos;s most beautiful locations. 
             From luxury condos to family homes, we help you find the perfect place to call home.
           </motion.p>
           <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" variants={itemVariants}>
@@ -398,7 +387,7 @@ export default function HomePage() {
               className="text-xl text-gray-300 max-w-2xl mx-auto"
               variants={itemVariants}
             >
-              Don't just take our word for it - hear from our satisfied clients
+              Don&apos;t just take our word for it - hear from our satisfied clients
             </motion.p>
           </motion.div>
 
@@ -420,7 +409,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-300 mb-4">
-                "True North Realty helped us find our dream home in Vancouver. Their expertise and dedication made the entire process smooth and enjoyable."
+                &quot;True North Realty helped us find our dream home in Vancouver. Their expertise and dedication made the entire process smooth and enjoyable.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center mr-4">
@@ -444,7 +433,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-300 mb-4">
-                "Professional, knowledgeable, and trustworthy. They sold our property above asking price in just two weeks!"
+                &quot;Professional, knowledgeable, and trustworthy. They sold our property above asking price in just two weeks!&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center mr-4">
@@ -468,7 +457,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-300 mb-4">
-                "Exceptional service from start to finish. They truly understand the local market and provided invaluable insights."
+                &quot;Exceptional service from start to finish. They truly understand the local market and provided invaluable insights.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center mr-4">

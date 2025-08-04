@@ -2,6 +2,7 @@
 
 import React, { Suspense, useState } from 'react';
 import Spline from '@splinetool/react-spline';
+import Link from 'next/link';
 
 export default function TestSplinePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ export default function TestSplinePage() {
     setIsLoading(false);
   };
 
-  const handleError = (error: any) => {
+  const handleError = (error: unknown) => {
     console.error('❌ Spline scene failed to load:', error);
     setHasError(true);
     setIsLoading(false);
@@ -75,12 +76,11 @@ export default function TestSplinePage() {
         </div>
 
         <div className="mt-8 text-center">
-          <a 
-            href="/" 
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full transition-colors"
-          >
-            Back to Home
-          </a>
+          <Link href="/" legacyBehavior>
+            <a className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+              Back to Home
+            </a>
+          </Link>
         </div>
       </div>
     </div>
